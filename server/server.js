@@ -1,42 +1,69 @@
-const mongoose = require('mongoose');
-
-//mongoose provide global promises to access
-
-mongoose.Promise =global.Promise;
-//connection to database
-mongoose.connect('mongodb://localhost:27017/TodoApp');
+var express = require('express');
+var bodyParser = require('body-parser');
 
 
-//Now creating model to the Todos collection
-//model takes two arguments 1) collection name 2)model attributes
-var Todo = mongoose.model('Todo', {
+var app = express();
 
-    text: {
+app.use(bodyParser.json());
 
-        type: String
-    },
+var {mongoose} = require('./db/mongoose');
+var {Todo} = require('./models/todo');
+var {User} = require('./models/user');
 
-    completed: {
 
-        type: Boolean
-    },
 
-    completedAt: {
 
-        type: Number
-    }
+app.post('/todos', (req, res) => {
+console.log(req.body);
 
+var todo = new Todo({
+    text: req.body.text
 });
 
+todo.save().then((doc) => {
+res.send(doc);
+}, (e) => {
+    res.status(400).send(e);
+})
+})
+
+
+
+
+
+app.listen(3000, () => {
+    console.log('Server listening on 3000');
+});
 //passing value to the collection Todo
 
-var newTodo = new Todo({
-    text: 'Cook Dinner'
-});
+// var newTodo = new Todo({
+//     text: ' Edit this video '
+// });
 
 //now saving 
-newTodo.save().then((doc) => {
-    console.log(doc);
-}, (e) => {
-    console.log('Unable to save todo')
-});
+// newTodo.save().then((doc) => {
+//     console.log(doc);
+// }, (e) => {
+//     console.log('Unable to save todo', e)
+// });
+
+
+// new user model to check email
+
+
+
+// var user = new User({
+//     email: 'adityavardhan.nagamalli@blackcactusglobal.in',
+//     name: 'Aditya'
+// });
+
+// user.save().then((result)=> {
+
+//     console.log('User saved', result);
+
+// }, (err) => {
+// console.log('Unable to save user', err);
+// });
+
+
+
