@@ -27,13 +27,11 @@ res.send(doc);
 })
 })
 
-
-
-
-
 app.listen(3000, () => {
     console.log('Server listening on 3000');
 });
+
+module.exports = {app};
 //passing value to the collection Todo
 
 // var newTodo = new Todo({
