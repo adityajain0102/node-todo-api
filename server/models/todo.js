@@ -10,7 +10,7 @@ var Todo = mongoose.model('Todo', {
         required: true,
         minlength: 5,
         trim: true,
-        default:'postman'
+        default:'Someting'
     },
 
     completed: {

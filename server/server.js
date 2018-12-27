@@ -24,9 +24,19 @@ todo.save().then((doc) => {
 res.send(doc);
 }, (e) => {
     res.status(400).send(e);
-})
-})
+});
+});
 
+app.get('/todos', (req, res)=> {
+
+    Todo.find().then((todos)=> {
+res.status(200).send({todos});
+console.log(todos);
+console.log(todos.length);
+    }, (e) => {
+res.status(400).send(e);
+    })
+});
 app.listen(3000, () => {
     console.log('Server listening on 3000');
 });
