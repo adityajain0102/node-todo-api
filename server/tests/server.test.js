@@ -8,7 +8,7 @@ const {Todo} = require('./../models/todo');
 beforeEach((done) => {
     Todo.remove({}).then(()=> {
         done()
-    })
+    });
 });
 describe('POST /todos', () => {
 
