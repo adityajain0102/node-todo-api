@@ -4,6 +4,11 @@ var bodyParser = require('body-parser');
 
 var app = express();
 
+const port = process.env.PORT || 3000;
+
+
+
+
 app.use(bodyParser.json());
 
 var {mongoose} = require('./db/mongoose');
@@ -37,8 +42,8 @@ console.log(todos.length);
 res.status(400).send(e);
     })
 });
-app.listen(3000, () => {
-    console.log('Server listening on 3000');
+app.listen(port, () => {
+    console.log('Server listening on ', + port);
 });
 
 module.exports = {app};
